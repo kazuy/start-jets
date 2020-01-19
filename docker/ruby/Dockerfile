@@ -1,7 +1,7 @@
 FROM ruby:2.5-alpine
 
 RUN apk update && \
-    apk add --no-cache build-base libxml2-dev libxslt-dev git
+    apk add --no-cache build-base libxml2-dev libxslt-dev git mariadb-dev
 
 RUN adduser -S jets && \
     echo "jets ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
