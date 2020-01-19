@@ -1,0 +1,4 @@
+FROM ruby:2.5-alpine
+
+ENV APP_HOME=/app
+WORKDIR $APP_HOME
