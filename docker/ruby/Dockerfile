@@ -1,7 +1,7 @@
 FROM ruby:2.5-alpine
 
 RUN apk update && \
-    apk add --no-cache build-base libxml2-dev libxslt-dev
+    apk add --no-cache build-base libxml2-dev libxslt-dev git
 
 RUN adduser -S jets && \
     echo "jets ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
