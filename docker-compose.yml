@@ -6,3 +6,10 @@ services:
       dockerfile: ./docker/ruby/Dockerfile
     volumes:
       - .:/app
+      - bundle-data:/usr/local/bundle
+    ports:
+      - "8888:8888"
+    command: bundle exec jets server --port 8888 --host 0.0.0.0
+volumes:
+  bundle-data:
+    driver: local
