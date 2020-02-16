@@ -1,15 +1,15 @@
-FROM node:alpine as builder
+FROM node:12.16.0-buster as builder
 
-FROM ruby:2.5-alpine
+FROM ruby:2.5-buster
 
-RUN apk update && \
-    apk add --no-cache build-base libxml2-dev libxslt-dev git mariadb-dev
+RUN apt-get update && \
+    apt-get install -y default-mysql-client rsync zip
 
-RUN adduser -S jets && \
-    echo "jets ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    echo 'jets:jets' | chpasswd
+RUN useradd -m jets && \
+    gpasswd -a jets sudo && \
+    echo "jets:jets" | chpasswd
 
-ENV YARN_VERSION=1.21.1
+ENV YARN_VERSION=1.22.0
 COPY --from=builder /opt/yarn-v$YARN_VERSION /opt/yarn/
 COPY --from=builder /usr/local/bin/node /usr/local/bin/
 RUN ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn && \
